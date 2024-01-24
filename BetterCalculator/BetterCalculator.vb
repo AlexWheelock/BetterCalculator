@@ -1,4 +1,13 @@
-﻿Module BetterCalculator
+﻿'Alex Wheelock
+'RCET 0265
+'Spring 2024
+'Better Calculator
+'https://github.com/AlexWheelock/Simple-Calculator.git
+
+Option Explicit On
+Option Strict On
+
+Module BetterCalculator
 
     Sub Main()
         'Creates Variables for User input
@@ -10,34 +19,35 @@
         Dim Operation As Integer
         Dim Answer As Integer
         Dim sign As String
+        Dim Bool As Boolean
 
         Do
 
-            userNumber1 = vbNull
-            userNumber2 = vbNull
-            Answer = vbNull
+            userNumber1 = 0
+            userNumber2 = 0
+            Answer = 0
             sign = ""
 
             Console.WriteLine("Please Enter Two Numbers. Enter " & Chr(34) & "Q" & Chr(34) & " at any time to quit")
 
             Do
-                Console.ReadLine()
+
                 userInput1 = Console.ReadLine() 'takes user input
                 Try
                     userNumber1 = CInt(userInput1)
-                    Console.WriteLine($"You entered {userNumber1}")
+                    Console.WriteLine($"You entered " & Chr(34) & userNumber1 & Chr(34))
                 Catch ex As Exception
                     If userInput1 = "q" Then
-                        Console.WriteLine("Have a nice day" & vbNewLine _
+                        Console.WriteLine("Have a nice day!" & vbNewLine _
                                   & "Press enter to close this window")
                         Console.Read()
                         Exit Sub
                     Else
-                        Console.WriteLine("You entered" & Chr(34) & CStr(userInput1) & Chr(34) & ", please enter a whole number")
+                        Console.WriteLine("You entered " & Chr(34) & CStr(userInput1) & Chr(34) & ". Please enter a whole number.")
                     End If
                 End Try
 
-            Loop Until userNumber1 <> vbNull
+            Loop Until userNumber1 <> 0
 
             Do
                 'prompts the user to define Number2 variable
@@ -46,19 +56,19 @@
 
                 Try
                     userNumber2 = CInt(userInput2)
-                    Console.WriteLine($"You entered {userNumber2}")
+                    Console.WriteLine($"You entered " & Chr(34) & userNumber2 & Chr(34))
                 Catch ex As Exception
-                    If userInput1 = "q" Then
-                        Console.WriteLine("Have a nice day" & vbNewLine _
-                                  & "Press enter to close this window")
+                    If userInput2 = "q" Then
+                        Console.WriteLine("Have a nice day!" & vbNewLine _
+                                  & "Press enter to close this window.")
                         Console.Read()
                         Exit Sub
                     Else
-                        Console.WriteLine("You entered" & Chr(34) & CStr(userInput2) & Chr(34) & ", please enter a whole number")
+                        Console.WriteLine("You entered " & Chr(34) & CStr(userInput2) & Chr(34) & ". Please enter a whole number.")
                     End If
                 End Try
 
-            Loop Until userNumber2 <> vbNull
+            Loop Until userNumber2 <> 0
 
             Do
 
@@ -72,38 +82,44 @@
 
                 Try
                     Operation = CInt(userInput3)
-                    Console.WriteLine($"You entered {Operation}")
                 Catch ex As Exception
                     If userInput3 = "q" Then
-                        Console.WriteLine("Have a nice day" & vbNewLine _
-                                  & "Press enter to close this window")
+                        Console.WriteLine("Have a nice day!" & vbNewLine _
+                                  & "Press enter to close this window.")
                         Console.Read()
                         Exit Sub
-
-                    ElseIf Operation = 1 Then
-                        Answer = userNumber1 + userNumber2
-                        sign = "+"
-
-                    ElseIf Operation = 2 Then
-                        Answer = userNumber1 - userNumber2
-                        sign = "-"
-
-                    ElseIf Operation = 3 Then
-                        Answer = userNumber1 * userNumber2
-                        sign = "*"
-
-                    ElseIf Operation = 4 Then
-                        Answer = userNumber1 \ userNumber2
-                        sign = "/"
-
-                    Else Console.WriteLine("You Entered " & Chr(34) & CStr(Operation) & Chr(34) & ", please enter a valid input.")
-
                     End If
                 End Try
-            Loop Until Operation = 1 - 4
 
-            Console.WriteLine((userInput1) & " " & CStr(sign) & " " & CStr(userInput2) & " = " & CStr(Answer) & vbNewLine _
-                          & "The Answer is " & Answer & ".")
+                If userInput3 = "q" Then
+                    Console.WriteLine("Have a nice day!" & vbNewLine _
+                              & "Press enter to close this window.")
+                    Console.Read()
+                    Exit Sub
+
+                ElseIf Operation = 1 Then
+                    Answer = userNumber1 + userNumber2
+                    sign = "+"
+                    Bool = True
+                ElseIf Operation = 2 Then
+                    Answer = userNumber1 - userNumber2
+                    sign = "-"
+                    Bool = True
+                ElseIf Operation = 3 Then
+                    Answer = userNumber1 * userNumber2
+                    sign = "*"
+                    Bool = True
+                ElseIf Operation = 4 Then
+                    Answer = userNumber1 \ userNumber2
+                    sign = "/"
+                    Bool = True
+                End If
+
+                Console.WriteLine("You entered " & Chr(34) & userInput3 & Chr(34))
+
+            Loop Until Bool = True
+
+            Console.WriteLine((userInput1) & " " & CStr(sign) & " " & CStr(userInput2) & " = " & CStr(Answer))
         Loop
     End Sub
 
