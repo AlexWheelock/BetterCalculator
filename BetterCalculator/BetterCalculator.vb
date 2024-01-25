@@ -17,16 +17,23 @@ Module BetterCalculator
         Dim userNumber2 As Integer
         Dim userInput3 As String
         Dim Operation As Integer
-        Dim Answer As Integer
+        Dim AnswerInt As Integer
+        Dim AnswerStr As String
         Dim sign As String
-        Dim Bool As Boolean
+        Dim Boolean1 As Boolean
+        Dim Boolean2 As Boolean
+        Dim Boolean3 As Boolean
 
         Do
 
             userNumber1 = 0
             userNumber2 = 0
-            Answer = 0
+            AnswerInt = 0
+            AnswerStr = ""
             sign = ""
+            Boolean1 = False
+            Boolean2 = False
+            Boolean3 = False
 
             Console.WriteLine("Please Enter Two Numbers. Enter " & Chr(34) & "Q" & Chr(34) & " at any time to quit")
 
@@ -36,6 +43,7 @@ Module BetterCalculator
                 Try
                     userNumber1 = CInt(userInput1)
                     Console.WriteLine($"You entered " & Chr(34) & userNumber1 & Chr(34))
+                    Boolean1 = True
                 Catch ex As Exception
                     If userInput1 = "q" Then
                         Console.WriteLine("Have a nice day!" & vbNewLine _
@@ -47,7 +55,7 @@ Module BetterCalculator
                     End If
                 End Try
 
-            Loop Until userNumber1 <> 0
+            Loop Until Boolean1 = True
 
             Do
                 'prompts the user to define Number2 variable
@@ -57,6 +65,7 @@ Module BetterCalculator
                 Try
                     userNumber2 = CInt(userInput2)
                     Console.WriteLine($"You entered " & Chr(34) & userNumber2 & Chr(34))
+                    Boolean2 = True
                 Catch ex As Exception
                     If userInput2 = "q" Then
                         Console.WriteLine("Have a nice day!" & vbNewLine _
@@ -68,7 +77,7 @@ Module BetterCalculator
                     End If
                 End Try
 
-            Loop Until userNumber2 <> 0
+            Loop Until Boolean2 = True
 
             Do
 
@@ -98,28 +107,38 @@ Module BetterCalculator
                     Exit Sub
 
                 ElseIf Operation = 1 Then
-                    Answer = userNumber1 + userNumber2
+                    AnswerInt = userNumber1 + userNumber2
                     sign = "+"
-                    Bool = True
+                    Boolean3 = True
+                    AnswerStr = CStr(AnswerInt)
                 ElseIf Operation = 2 Then
-                    Answer = userNumber1 - userNumber2
+                    AnswerInt = userNumber1 - userNumber2
                     sign = "-"
-                    Bool = True
+                    Boolean3 = True
+                    AnswerStr = CStr(AnswerInt)
                 ElseIf Operation = 3 Then
-                    Answer = userNumber1 * userNumber2
+                    AnswerInt = userNumber1 * userNumber2
                     sign = "*"
-                    Bool = True
+                    Boolean3 = True
+                    AnswerStr = CStr(AnswerInt)
                 ElseIf Operation = 4 Then
-                    Answer = userNumber1 \ userNumber2
-                    sign = "/"
-                    Bool = True
+                    Try
+                        AnswerInt = userNumber1 \ userNumber2
+                        sign = "/"
+                        Boolean3 = True
+                        AnswerStr = CStr(AnswerInt)
+                    Catch
+                        AnswerStr = "Inifity"
+                        sign = "/"
+                        Boolean3 = True
+                    End Try
                 End If
 
                 Console.WriteLine("You entered " & Chr(34) & userInput3 & Chr(34))
 
-            Loop Until Bool = True
+            Loop Until Boolean3 = True
 
-            Console.WriteLine((userInput1) & " " & CStr(sign) & " " & CStr(userInput2) & " = " & CStr(Answer))
+            Console.WriteLine((userInput1) & " " & CStr(sign) & " " & CStr(userInput2) & " = " & CStr(AnswerStr))
         Loop
     End Sub
 
