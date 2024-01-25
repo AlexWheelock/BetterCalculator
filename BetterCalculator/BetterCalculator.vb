@@ -128,9 +128,10 @@ Module BetterCalculator
                         Boolean3 = True
                         AnswerStr = CStr(AnswerInt)
                     Catch
-                        AnswerStr = "Inifity"
+                        AnswerStr = "Infinity"
                         sign = "/"
                         Boolean3 = True
+                        Console.WriteLine("Did you really just try to divide by zero?")
                     End Try
                 End If
 
